@@ -75,8 +75,10 @@ namespace :spec do
       # Install the gems with a consistent version of RubyGems
       sh "gem update --system 2.6.13"
 
-      # Fix incorrect default gem specifications on ruby 2.6.1
-      sh "gem install etc --default" if RUBY_VERSION == "2.6.1"
+      if RUBY_VERSION == "2.6.1" # Fix incorrect default gem specifications on ruby 2.6.1
+        sh "gem install etc --default"
+        sh "gem install bundler --default"
+      end
 
       $LOAD_PATH.unshift("./spec")
       require "support/rubygems_ext"
