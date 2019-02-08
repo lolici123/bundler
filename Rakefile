@@ -75,6 +75,9 @@ namespace :spec do
       # Install the gems with a consistent version of RubyGems
       sh "gem update --system 2.6.13"
 
+      # Fix incorrect default gem specifications on ruby 2.6.1
+      sh "gem install etc --default" if RUBY_VERSION == "2.6.1"
+
       $LOAD_PATH.unshift("./spec")
       require "support/rubygems_ext"
       Spec::Rubygems::DEPS["codeclimate-test-reporter"] = "~> 0.6.0" if RUBY_VERSION >= "2.2.0"
